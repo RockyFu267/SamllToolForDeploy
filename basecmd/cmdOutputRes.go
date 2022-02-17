@@ -8,7 +8,7 @@ import (
 	"os/exec"
 )
 
-//CmdAndChangeDirToRes 输入命令,暂时不对结果做处理
+//CmdAndChangeDirToRes 输入命令,不支持管道符
 func CmdAndChangeDirToRes(dir string, commandName string, params []string) ([]string, error) {
 	res := []string{}
 	cmd := exec.Command(commandName, params...)
@@ -43,7 +43,7 @@ func CmdAndChangeDirToRes(dir string, commandName string, params []string) ([]st
 	return res, err
 }
 
-//CmdAndChangeDirToResAllInOne 输入命令,暂时不对结果做处理
+//CmdAndChangeDirToResAllInOne 输入命令 支持管道符
 func CmdAndChangeDirToResAllInOne(dir string, commandName string) ([]string, error) {
 	res := []string{}
 	cmd := exec.Command("bash", "-c", commandName)
