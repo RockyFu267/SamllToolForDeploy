@@ -6,9 +6,10 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"strings"
 )
 
-//CmdAndChangeDirToRes 输入命令,不支持管道符
+//CmdAndChangeDirToRes 输入命令,不支持管道符,line带换行符
 func CmdAndChangeDirToRes(dir string, commandName string, params []string) ([]string, error) {
 	res := []string{}
 	cmd := exec.Command(commandName, params...)
@@ -43,7 +44,7 @@ func CmdAndChangeDirToRes(dir string, commandName string, params []string) ([]st
 	return res, err
 }
 
-//CmdAndChangeDirToResAllInOne 输入命令 支持管道符
+//CmdAndChangeDirToResAllInOne 输入命令 支持管道符， 取消line换行符
 func CmdAndChangeDirToResAllInOne(dir string, commandName string) ([]string, error) {
 	res := []string{}
 	cmd := exec.Command("bash", "-c", commandName)
@@ -72,6 +73,7 @@ func CmdAndChangeDirToResAllInOne(dir string, commandName string) ([]string, err
 
 			break
 		}
+		line = strings.Replace(line, "\n", "", -1)
 		res = append(res, line)
 	}
 	err = cmd.Wait()
