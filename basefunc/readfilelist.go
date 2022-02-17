@@ -19,10 +19,20 @@ func ReadTGZFileList(dir string) ([]string, error) {
 	return res, nil
 }
 
-//ReadFileList 获取所有文件列表
+//ReadFileList 获取所有文件列表 不能过滤文件夹
 func ReadFileList(dir string) ([]string, error) {
-	params := []string{"-l |grep -v \"^d\""}
+	params := []string{}
 	res, err := basecmd.CmdAndChangeDirToRes(dir, "ls", params)
+	if err != nil {
+		log.Println(err)
+		return res, err
+	}
+	return res, nil
+}
+
+//ReadFileListNew 获取所有文件列表 可以过滤文件夹和格式
+func ReadFileListNew(dir string) ([]string, error) {
+	res, err := basecmd.CmdAndChangeDirToResAllInOne(dir, "ls -l|grep -v '^d' | awk '(NR > 1){print $9}'")
 	if err != nil {
 		log.Println(err)
 		return res, err

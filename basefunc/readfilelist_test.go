@@ -25,6 +25,16 @@ func Test_ReadFileList(t *testing.T) {
 
 }
 
+func Test_ReadFileListNew(t *testing.T) {
+	res, err := ReadFileListNew("/Users/fuao/Downloads/chart-test/test01")
+	if err != nil {
+		log.Println("cmd.StdoutPipe: ", err)
+		return
+	}
+	fmt.Println(res)
+
+}
+
 func Test_TestList(t *testing.T) {
 	res := TestList()
 
