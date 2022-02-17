@@ -1,7 +1,7 @@
 package main
 
 import (
-	"SamllToolForDeploy/basecmd"
+	"SamllToolForDeploy/basefunc"
 	"flag"
 	"fmt"
 	"log"
@@ -13,13 +13,11 @@ func main() {
 	//获取参数
 	flag.Parse()
 	fmt.Println("hi buddy")
-	params := []string{}
-	err := basecmd.CmdAndChangeDirToShow(*source_path, "ls", params)
-	fmt.Println(*source_path)
+	tgzFileList, err := basefunc.ReadFileListNew(*source_path)
 	if err != nil {
-
-		log.Println("cmd.StdoutPipe: ", err)
+		log.Println(err)
+		//***结束***
 		return
 	}
-
+	fmt.Println(tgzFileList)
 }
