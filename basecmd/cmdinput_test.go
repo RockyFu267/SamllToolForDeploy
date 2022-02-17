@@ -6,8 +6,8 @@ import (
 )
 
 func Test_CmdAndChangeDirToShow(t *testing.T) {
-	params := []string{}
-	err := CmdAndChangeDirToShow("/Users/fuao/Downloads/chart-test", "ls", params)
+	params := []string{"-l"}
+	err := CmdAndChangeDirToShow("/Users/fuao/Downloads/chart-test/test01", "ls", params)
 	if err != nil {
 		log.Println("cmd.StdoutPipe: ", err)
 		return
