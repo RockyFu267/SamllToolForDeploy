@@ -2,13 +2,14 @@ package basecmd
 
 import (
 	"bufio"
+	"fmt"
 	"io"
 	"log"
 	"os"
 	"os/exec"
 )
 
-//CmdAndChangeDirToShow 输入命令
+//CmdAndChangeDirToShow 输入命令,暂时不对结果做处理
 func CmdAndChangeDirToShow(dir string, commandName string, params []string) error {
 
 	cmd := exec.Command(commandName, params...)
@@ -37,7 +38,7 @@ func CmdAndChangeDirToShow(dir string, commandName string, params []string) erro
 
 			break
 		}
-		log.Println(line)
+		fmt.Println(line)
 	}
 	err = cmd.Wait()
 	return err
