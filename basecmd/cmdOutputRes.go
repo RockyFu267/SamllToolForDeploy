@@ -74,6 +74,9 @@ func CmdAndChangeDirToResAllInOne(dir string, commandName string) ([]string, err
 			break
 		}
 		line = strings.Replace(line, "\n", "", -1)
+
+		// // 去除空格的写法
+		// str = strings.Replace(str, " ", "", -1)
 		res = append(res, line)
 	}
 	err = cmd.Wait()
