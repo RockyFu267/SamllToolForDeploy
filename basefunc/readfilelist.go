@@ -7,6 +7,28 @@ import (
 	"os/exec"
 )
 
+//ReadFileListNew 获取所有文件列表 可以过滤文件夹和格式
+func ReadFileListNew(dir string) ([]string, error) {
+	resTmp, err := basecmd.CmdAndChangeDirToResAllInOne(dir, "ls -l|grep -v '^d' | awk '(NR > 1){print $9}'")
+	if err != nil {
+		log.Println(err)
+		return resTmp, err
+	}
+	res := []string{}
+	//过滤格式
+	for _, v := range resTmp {
+		fmt.Println(v, len(v))
+		if len(v) <= 4 {
+			continue
+		}
+		if v[len(v)-4:] != ".tgz" {
+			continue
+		}
+		res = append(res, v)
+	}
+	return res, nil
+}
+
 func ReadTGZFileList(dir string) ([]string, error) {
 	res, err := ReadFileList(dir)
 	if err != nil {
@@ -26,28 +48,6 @@ func ReadFileList(dir string) ([]string, error) {
 	if err != nil {
 		log.Println(err)
 		return res, err
-	}
-	return res, nil
-}
-
-//ReadFileListNew 获取所有文件列表 可以过滤文件夹和格式
-func ReadFileListNew(dir string) ([]string, error) {
-	resTmp, err := basecmd.CmdAndChangeDirToResAllInOne(dir, "ls -l|grep -v '^d' | awk '(NR > 1){print $9}'")
-	if err != nil {
-		log.Println(err)
-		return resTmp, err
-	}
-	res := []string{}
-	//过滤格式
-	for _, v := range resTmp {
-		fmt.Println(v, len(v))
-		if len(v) <= 4 {
-			continue
-		}
-		if v[len(v)-4:] != ".tgz" {
-			continue
-		}
-		res = append(res, v)
 	}
 	return res, nil
 }
