@@ -8,6 +8,7 @@ import (
 )
 
 var source_path *string = flag.String("sourcepath", "./", "Use -sourcepath <source_path>")
+var target_path *string = flag.String("targetpath", "./output", "Use -targetpath <source_path>")
 
 func main() {
 	//获取参数
@@ -20,4 +21,5 @@ func main() {
 		return
 	}
 	fmt.Println(tgzFileList)
+	fmt.Println(*target_path)
 }
