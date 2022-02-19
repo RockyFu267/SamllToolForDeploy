@@ -12,6 +12,8 @@
   - ✓ 依次解压tgz文件列表到指定的目标路径下
 + 通过helm命令渲染chart
   - 先检查helm是否存在，不存在添加helm
+    - 判断系统 mac or centos
+    - 暂时不做，需要用户准备k8s接口以及helm，默认用户已有环境
   - dry run 渲染
   - 可以指定ns 如果不指定 默认是default
   - 输出都统一注入到一个yaml文件
