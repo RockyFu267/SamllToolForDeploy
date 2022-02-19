@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"runtime"
 )
 
 var source_path *string = flag.String("sourcepath", "./", "Use -sourcepath <source_path>")
@@ -51,4 +52,7 @@ func main() {
 	}
 	// fmt.Println(tgzFileList)
 	// fmt.Println(*target_path)
+	fmt.Println(os.Hostname())
+	fmt.Println(runtime.GOARCH) //系统构架 386、amd64
+	fmt.Println(runtime.GOOS)   //系统版本 windows
 }
