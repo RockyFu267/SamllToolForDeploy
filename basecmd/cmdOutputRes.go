@@ -14,7 +14,7 @@ import (
 func CmdAndChangeDirToRes(dir string, commandName string, params []string) ([]string, error) {
 	res := []string{}
 	cmd := exec.Command(commandName, params...)
-	log.Println("CmdAndChangeDirToFile", dir, cmd.Args)
+	log.Println("CmdAndChangeDirToRes", dir, cmd.Args)
 	//StdoutPipe方法返回一个在命令Start后与命令标准输出关联的管道。Wait方法获知命令结束后会关闭这个管道，一般不需要显式的关闭该管道。
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
@@ -49,7 +49,7 @@ func CmdAndChangeDirToRes(dir string, commandName string, params []string) ([]st
 func CmdAndChangeDirToResAllInOne(dir string, commandName string) ([]string, error) {
 	res := []string{}
 	cmd := exec.Command("bash", "-c", commandName)
-	log.Println("CmdAndChangeDirToFile", dir, cmd.Args)
+	log.Println("CmdAndChangeDirToResAllInOne", dir, cmd.Args)
 	//StdoutPipe方法返回一个在命令Start后与命令标准输出关联的管道。Wait方法获知命令结束后会关闭这个管道，一般不需要显式的关闭该管道。
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
@@ -84,7 +84,7 @@ func CmdAndChangeDirToResAllInOne(dir string, commandName string) ([]string, err
 	return res, err
 }
 
-func CmdAndChangeDirToFile(pathAndFileName, dir, commandName string) error {
+func CmdAndChangeDirToResFile(pathAndFileName, dir, commandName string) error {
 	f, err := os.Create(pathAndFileName) //创建文件
 	if err != nil {
 		log.Println("create error: ", err)
@@ -92,7 +92,7 @@ func CmdAndChangeDirToFile(pathAndFileName, dir, commandName string) error {
 	}
 	defer f.Close()
 	cmd := exec.Command("bash", "-c", commandName)
-	fmt.Println("CmdAndChangeDirToFile", dir, cmd.Args)
+	fmt.Println("CmdAndChangeDirToResFile", dir, cmd.Args)
 	//StdoutPipe方法返回一个在命令Start后与命令标准输出关联的管道。Wait方法获知命令结束后会关闭这个管道，一般不需要显式的关闭该管道。
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {

@@ -17,17 +17,19 @@ func DryRun(targetpath string) error {
 		log.Println(err)
 		return err
 	}
+	fmt.Println("step1")
 	for _, v := range dirList {
 		chartNameTmp, err := GetChartName(targetpath + "/" + v + "/" + "Chart.yaml")
 		if err != nil {
 			continue
 		}
-		resTmp, err := basecmd.CmdAndChangeDirToResAllInOne(targetpath, "helm install -n testtest "+chartNameTmp+" ./"+v+" --dry-run")
+		fmt.Println("step2")
+		err = basecmd.CmdAndChangeDirToResFile(targetpath+"/chartyaml/"+chartNameTmp+".yaml", targetpath, "helm install -n testtest "+chartNameTmp+" ./"+v+" --dry-run")
 		if err != nil {
 			log.Println(err)
-			return err
+			continue
 		}
-		fmt.Println(resTmp)
+		fmt.Println("step3")
 	}
 	return nil
 }

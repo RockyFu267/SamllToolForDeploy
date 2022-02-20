@@ -7,11 +7,12 @@ import (
 )
 
 func Test_DryRun(t *testing.T) {
-	err := DryRun("/Users/fuao/Downloads/chart-test/test01/test000/")
+	err := DryRun("/Users/fuao/Desktop/code/github/SamllToolForDeploy/output/")
 	if err != nil {
 		log.Println("cmd.StdoutPipe: ", err)
 		return
 	}
+	fmt.Println("what")
 
 }
 func Test_GetChartName(t *testing.T) {
