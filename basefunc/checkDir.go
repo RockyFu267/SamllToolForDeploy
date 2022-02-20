@@ -16,6 +16,10 @@ func CheckDir(path string) error {
 		if err != nil {
 			return err
 		}
+		err = CreateDir(path + "/chartyaml/")
+		if err != nil {
+			return err
+		}
 	}
 	return nil
 }
