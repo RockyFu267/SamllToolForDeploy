@@ -24,7 +24,10 @@ func DryRun(targetpath string) error {
 			continue
 		}
 		fmt.Println("step2")
-		err = basecmd.CmdAndChangeDirToResFile(targetpath+"/chartyaml/"+chartNameTmp+".yaml", targetpath, "helm install -n testtest "+chartNameTmp+" ./"+v+" --dry-run")
+		//***使用debug***
+		//err = basecmd.CmdAndChangeDirToResFile(targetpath+"/chartyaml/"+chartNameTmp+".yaml", targetpath, "helm install -n testtest "+chartNameTmp+" ./"+v+" --dry-run")
+		//***使用template***
+		err = basecmd.CmdAndChangeDirToResFile(targetpath+"/chartyaml/"+chartNameTmp+".yaml", targetpath, "helm template -n testtest "+chartNameTmp+" ./"+v)
 		if err != nil {
 			log.Println(err)
 			continue
