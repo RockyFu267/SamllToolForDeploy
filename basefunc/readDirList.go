@@ -3,6 +3,7 @@ package basefunc
 import (
 	"SamllToolForDeploy/basecmd"
 	"log"
+	"os"
 )
 
 func ReadDirList(targetpath string) ([]string, error) {
@@ -11,6 +12,16 @@ func ReadDirList(targetpath string) ([]string, error) {
 		log.Println(err)
 		return resTmp, err
 	}
-
-	return resTmp, nil
+	res := []string{}
+	//过滤有效目录
+	for _, v := range resTmp {
+		_, err := os.Stat(targetpath + "/" + v + "/Chart.yaml")
+		if err != nil {
+			log.Println(err)
+			//如果不存在
+			continue
+		}
+		res = append(res, v)
+	}
+	return res, nil
 }
