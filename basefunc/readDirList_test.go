@@ -7,7 +7,7 @@ import (
 )
 
 func Test_ReadDirList(t *testing.T) {
-	res, err := ReadDirList("/Users/fuao/Downloads/chart-test/")
+	res, err := ReadDirList("/Users/fuao/Desktop/code/github/SamllToolForDeploy/output/")
 	if err != nil {
 		log.Println("cmd.StdoutPipe: ", err)
 		return

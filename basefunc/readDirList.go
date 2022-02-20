@@ -17,7 +17,7 @@ func ReadDirList(targetpath string) ([]string, error) {
 	for _, v := range resTmp {
 		_, err := os.Stat(targetpath + "/" + v + "/Chart.yaml")
 		if err != nil {
-			log.Println(err)
+			log.Println("get os.stat fail: ", err)
 			//如果不存在
 			continue
 		}
