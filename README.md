@@ -15,6 +15,6 @@
     - 判断系统 mac or centos
     - 暂时不做，需要用户准备k8s接口以及helm，默认用户已有环境
   - dry run 渲染
+    - 获取对应的文件夹内的Chart.yaml中的name的值，并以垓值为服务名称
   - 可以指定ns 如果不指定 默认是default
   - 输出都统一注入到一个yaml文件
-  
