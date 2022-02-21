@@ -7,7 +7,7 @@ import (
 )
 
 func Test_DryRun(t *testing.T) {
-	err := DryRun("/Users/fuao/Desktop/code/github/SamllToolForDeploy/output/")
+	err := DryRun("/Users/fuao/Desktop/code/github/SamllToolForDeploy/output/", "testtest")
 	if err != nil {
 		log.Println("cmd.StdoutPipe: ", err)
 		return

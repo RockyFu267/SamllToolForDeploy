@@ -11,7 +11,7 @@ import (
 )
 
 //DryRun 通过helm dryrun 来获取渲染后的yaml
-func DryRun(targetpath string) error {
+func DryRun(targetpath string, namespace string) error {
 	dirList, err := ReadDirList(targetpath)
 	if err != nil {
 		log.Println(err)
@@ -27,7 +27,7 @@ func DryRun(targetpath string) error {
 		//***使用debug***
 		//err = basecmd.CmdAndChangeDirToResFile(targetpath+"/chartyaml/"+chartNameTmp+".yaml", targetpath, "helm install -n testtest "+chartNameTmp+" ./"+v+" --dry-run")
 		//***使用template***
-		err = basecmd.CmdAndChangeDirToResFile(targetpath+"/chartyaml/"+chartNameTmp+".yaml", targetpath, "helm template -n testtest "+chartNameTmp+" ./"+v)
+		err = basecmd.CmdAndChangeDirToResFile(targetpath+"/chartyaml/"+chartNameTmp+".yaml", targetpath, "helm template -n "+namespace+" "+chartNameTmp+" ./"+v)
 		if err != nil {
 			log.Println(err)
 			continue
