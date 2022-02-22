@@ -19,4 +19,8 @@
     -  ✓ 获取对应的文件夹内的Chart.yaml中的name的值，并以垓值为服务名称
     -  ✓ 输出注入到一个对应的yaml文件
     -  ✓ 可以指定ns 如果不指定 默认是default
+    - 支持修改所有image的名称,替换仓库以及路径名称，不指定则不替换
+    - 识别配置中的多个不同类型文件
+    - 检查所有deployment中的container配置，是否包含limt和request，填充缺失,默认2c2G；如果存在limit，则以limit为request填充；
+    - 替换storageclass
 
