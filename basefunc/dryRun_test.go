@@ -23,3 +23,12 @@ func Test_GetChartName(t *testing.T) {
 	}
 	fmt.Println(res)
 }
+
+func Test_ReadFileTypeDemo(t *testing.T) {
+	err := ReadFileTypeDemo("/Users/fuao/Desktop/code/github/SamllToolForDeploy/output/chartyaml/asd.yaml")
+	if err != nil {
+		log.Println("cmd.StdoutPipe: ", err)
+		return
+	}
+	fmt.Println("ok")
+}

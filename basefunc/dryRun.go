@@ -2,6 +2,7 @@ package basefunc
 
 import (
 	"SamllToolForDeploy/basecmd"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"io/ioutil"
@@ -53,4 +54,40 @@ func GetChartName(targetpath string) (string, error) {
 		return "", errors.New("chart-name is empty")
 	}
 	return tmpStruct.Name, nil
+}
+
+func ReadFileTypeDemo(targetpath string) error {
+	// var tmpStruct []map[string]interface{}
+	var tmpStruct TestTest
+	yamlFile, err := ioutil.ReadFile(targetpath)
+	if err != nil {
+		log.Printf("yamlFile.Get err   #%v ", err)
+	}
+	err = yamlV2.Unmarshal(yamlFile, &tmpStruct)
+	if err != nil {
+		return err
+	}
+	// result := []string{}
+	// s := string(yamlFile)
+	// for _, lineStr := range strings.Split(s, "\n") {
+	// 	lineStr = strings.TrimSpace(lineStr)
+	// 	if lineStr == "" {
+	// 		continue
+	// 	}
+	// 	result = append(result, lineStr)
+	// }
+	// for _, v := range result {
+	// 	fmt.Println(v)
+	// }
+	tmpStruct.Ccc.Cc1c.Cc1c2c = "fuckyou"
+	A, err := yamlV2.Marshal(tmpStruct)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+	fmt.Println(tmpStruct, "11111")
+	res2A, _ := json.Marshal(tmpStruct)
+	fmt.Println(string(res2A), "22222")
+	fmt.Println(string(A), "33333")
+	return nil
 }
