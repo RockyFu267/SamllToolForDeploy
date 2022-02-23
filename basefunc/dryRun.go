@@ -5,10 +5,13 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
+	"os"
 
 	yamlV2 "gopkg.in/yaml.v2"
+	yamlV3 "gopkg.in/yaml.v3"
 )
 
 //DryRun 通过helm dryrun 来获取渲染后的yaml
@@ -89,5 +92,13 @@ func ReadFileTypeDemo(targetpath string) error {
 	res2A, _ := json.Marshal(tmpStruct)
 	fmt.Println(string(res2A), "22222")
 	fmt.Println(string(A), "33333")
+	var r io.Reader
+	r, err = os.Open("/Users/fuao/Desktop/code/github/SamllToolForDeploy/output/chartyaml/asd.yaml")
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+	asd := yamlV3.NewDecoder(r)
+	fmt.Println(asd)
 	return nil
 }
