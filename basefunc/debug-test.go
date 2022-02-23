@@ -4,7 +4,7 @@ import (
 	"log"
 	"os"
 
-	yamlV2 "gopkg.in/yaml.v2"
+	yamlV3 "gopkg.in/yaml.v3"
 )
 
 type StructA struct {
@@ -28,7 +28,7 @@ func DebugTestFunc() {
 	var b StructB
 	x := 22
 
-	err := yamlV2.Unmarshal([]byte(data), &b)
+	err := yamlV3.Unmarshal([]byte(data), &b)
 	if err != nil {
 		log.Fatalf("cannot unmarshal data: %v", err)
 	}
@@ -36,7 +36,7 @@ func DebugTestFunc() {
 	yfile, _ := os.Create("test.yaml")
 	defer yfile.Close()
 
-	yencoder := yamlV2.NewEncoder(yfile)
+	yencoder := yamlV3.NewEncoder(yfile)
 	defer yencoder.Close()
 	yencoder.Encode(b)
 	yencoder.Encode(b)
