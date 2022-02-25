@@ -7,7 +7,7 @@ import (
 )
 
 func Test_DryRun(t *testing.T) {
-	err := DryRun("/Users/fuao/Desktop/code/github/SamllToolForDeploy/output/")
+	err := DryRun("/Users/fuao/Desktop/code/github/SamllToolForDeploy/output/", "testtest")
 	if err != nil {
 		log.Println("cmd.StdoutPipe: ", err)
 		return
@@ -22,4 +22,13 @@ func Test_GetChartName(t *testing.T) {
 		return
 	}
 	fmt.Println(res)
+}
+
+func Test_ReadFileTypeDemo(t *testing.T) {
+	err := ReadFileTypeDemo("/Users/fuao/Desktop/code/github/SamllToolForDeploy/output/chartyaml/asd.yaml")
+	if err != nil {
+		log.Println("cmd.StdoutPipe: ", err)
+		return
+	}
+	fmt.Println("ok")
 }

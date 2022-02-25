@@ -2,16 +2,20 @@ package basefunc
 
 import (
 	"SamllToolForDeploy/basecmd"
+	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"io/ioutil"
 	"log"
+	"os"
 
 	yamlV2 "gopkg.in/yaml.v2"
+	yamlV3 "gopkg.in/yaml.v3"
 )
 
 //DryRun 通过helm dryrun 来获取渲染后的yaml
-func DryRun(targetpath string) error {
+func DryRun(targetpath string, namespace string) error {
 	dirList, err := ReadDirList(targetpath)
 	if err != nil {
 		log.Println(err)
@@ -27,7 +31,7 @@ func DryRun(targetpath string) error {
 		//***使用debug***
 		//err = basecmd.CmdAndChangeDirToResFile(targetpath+"/chartyaml/"+chartNameTmp+".yaml", targetpath, "helm install -n testtest "+chartNameTmp+" ./"+v+" --dry-run")
 		//***使用template***
-		err = basecmd.CmdAndChangeDirToResFile(targetpath+"/chartyaml/"+chartNameTmp+".yaml", targetpath, "helm template -n testtest "+chartNameTmp+" ./"+v)
+		err = basecmd.CmdAndChangeDirToResFile(targetpath+"/chartyaml/"+chartNameTmp+".yaml", targetpath, "helm template -n "+namespace+" "+chartNameTmp+" ./"+v)
 		if err != nil {
 			log.Println(err)
 			continue
@@ -53,4 +57,48 @@ func GetChartName(targetpath string) (string, error) {
 		return "", errors.New("chart-name is empty")
 	}
 	return tmpStruct.Name, nil
+}
+
+func ReadFileTypeDemo(targetpath string) error {
+	// var tmpStruct []map[string]interface{}
+	var tmpStruct TestTest
+	yamlFile, err := ioutil.ReadFile(targetpath)
+	if err != nil {
+		log.Printf("yamlFile.Get err   #%v ", err)
+	}
+	err = yamlV2.Unmarshal(yamlFile, &tmpStruct)
+	if err != nil {
+		return err
+	}
+	// result := []string{}
+	// s := string(yamlFile)
+	// for _, lineStr := range strings.Split(s, "\n") {
+	// 	lineStr = strings.TrimSpace(lineStr)
+	// 	if lineStr == "" {
+	// 		continue
+	// 	}
+	// 	result = append(result, lineStr)
+	// }
+	// for _, v := range result {
+	// 	fmt.Println(v)
+	// }
+	tmpStruct.Ccc.Cc1c.Cc1c2c = "fuckyou"
+	A, err := yamlV2.Marshal(tmpStruct)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+	fmt.Println(tmpStruct, "11111")
+	res2A, _ := json.Marshal(tmpStruct)
+	fmt.Println(string(res2A), "22222")
+	fmt.Println(string(A), "33333")
+	var r io.Reader
+	r, err = os.Open("/Users/fuao/Desktop/code/github/SamllToolForDeploy/output/chartyaml/asd.yaml")
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+	asd := yamlV3.NewDecoder(r)
+	fmt.Println(asd)
+	return nil
 }

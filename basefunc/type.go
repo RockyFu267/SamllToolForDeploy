@@ -17,3 +17,17 @@ type ChartYaml struct {
 type ChartYamlMaintainers struct {
 	Name string `json:"name"`
 }
+
+type TestTest struct {
+	Aaa string      `json:"aaa,omitempty"`
+	Bbb string      `json:"bbb,omitempty"`
+	Ccc TestTestCcc `json:"ccc,omitempty"`
+	Ddd string      `json:"ddd,omitempty"`
+}
+type TestTestCcc struct {
+	Cc1c TestTestCccCc2c `json:"cc1c,omitempty"`
+}
+
+type TestTestCccCc2c struct {
+	Cc1c2c string `json:"cc1c2c,omitempty"`
+}

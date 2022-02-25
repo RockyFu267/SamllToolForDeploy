@@ -10,7 +10,8 @@ import (
 )
 
 var source_path *string = flag.String("sourcepath", "./", "Use -sourcepath <source_path>")
-var target_path *string = flag.String("targetpath", "", "Use -targetpath <source_path>")
+var target_path *string = flag.String("targetpath", "", "Use -targetpath <target_path>")
+var namespace *string = flag.String("namespace", "default", "Use -namespace <namespace>")
 
 func main() {
 	//获取参数
@@ -29,6 +30,7 @@ func main() {
 	if len(*target_path) == 0 {
 		targetpathTmp = pwdPath + "/output/"
 	}
+
 	fmt.Println(targetpathTmp)
 	//获取所有文件列表
 	tgzFileList, err := basefunc.ReadFileListNew(*source_path)
@@ -54,7 +56,7 @@ func main() {
 		return
 	}
 	fmt.Println("333333333333333333333333333333333333333333333333333")
-	err = basefunc.DryRun(targetpathTmp)
+	err = basefunc.DryRun(targetpathTmp, *namespace)
 	if err != nil {
 		log.Println(err)
 		//***结束***
